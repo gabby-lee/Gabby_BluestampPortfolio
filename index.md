@@ -69,7 +69,7 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
 
-}
+}https://www.amazon.com/Arduino-Nano-Sense-headers-ABX00070/dp/B0BQHZ88WD/
 ```
 
 # Bill of Materials
@@ -78,9 +78,9 @@ Don't forget to place the link of where to buy each component inside the quotati
 
 | **Part** | **Note** | **Price** | **Link** |
 |:--:|:--:|:--:|:--:|
-| Arduino Nano 33 BLE Sense | Tracks the gestures and runs the algorithm to process data | $39.7 USD | <a href="[https://www.amazon.com/Arduino-A000066-ARDUINO-UNO-R3/dp/B008GRTSV6/](https://www.amazon.com/Arduino-Nano-Sense-headers-ABX00070/dp/B0BQHZ88WD/)"> Link </a> |
-| Micro USB | To connect the Arduino board to your device | $7.34 USD | <a href="[https://www.amazon.com/Arduino-A000066-ARDUINO-UNO-R3/dp/B008GRTSV6/](https://www.amazon.com/Amazon-Basics-Charging-Transfer-Gold-Plated/dp/B07232M876/)"> Link </a> |
-| Electronics Kit | Provides neccessary hardware | $14 USD | <a href="[https://www.amazon.com/Arduino-A000066-ARDUINO-UNO-R3/dp/B008GRTSV6/](https://www.amazon.com/Smraza-Electronics-Potentiometer-tie-Points-Breadboard/dp/B0B62RL725/r)"> Link </a> |
+| Arduino Nano 33 BLE Sense | Tracks the gestures and runs the algorithm to process data | $39.7 USD | <a href="[https://www.amazon.com/Arduino-Nano-Sense-headers-ABX00070/dp/B0BQHZ88WD/]"> Link </a> |
+| Micro USB | To connect the Arduino board to your device | $7.34 USD | <a href="[https://www.amazon.com/Amazon-Basics-Charging-Transfer-Gold-Plated/dp/B07232M876/]"> Link </a> |
+| Electronics Kit | Provides neccessary hardware | $14 USD | <a href="[https://www.amazon.com/Smraza-Electronics-Potentiometer-tie-Points-Breadboard/dp/B0B62RL725/r]"> Link </a> |
 
 # Other Resources/Examples
 One of the best parts about Github is that you can view how other people set up their own work. Here are some past BSE portfolios that are awesome examples. You can view how they set up their portfolio, and you can view their index.md files to understand how they implemented different portfolio components.
