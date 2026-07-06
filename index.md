@@ -69,7 +69,7 @@ Don't forget to place the link of where to buy each component inside the quotati
 
 | **Part** | **Note** | **Price** | **Link** |
 |:--:|:--:|:--:|:--:|
-| Arduino Nano 33 BLE Sense | Tracks the gestures and runs the algorithm to process data | $39.7 USD | <a href="[https://www.amazon.com/Arduino-Nano-Sense-headers-ABX00070/dp/B0BQHZ88WD/]"> Link </a> |
+| Arduino Nano 33 BLE Sense | Tracks the gestures and runs the algorithm to process data | $39.7 USD | <a href="(https://www.amazon.com/Arduino-Nano-Sense-headers-ABX00070/dp/B0BQHZ88WD/)"> Link </a> |
 | Micro USB | To connect the Arduino board to your device | $7.34 USD | <a href="[https://www.amazon.com/Amazon-Basics-Charging-Transfer-Gold-Plated/dp/B07232M876/]"> Link </a> |
 | Electronics Kit | Provides neccessary hardware | $14 USD | <a href="[https://www.amazon.com/Smraza-Electronics-Potentiometer-tie-Points-Breadboard/dp/B0B62RL725/r]"> Link </a> |
 
