@@ -33,13 +33,31 @@ For your final milestone, explain the outcome of your project. Key details to in
 
 **Don't forget to replace the text below with the embedding for your milestone video. Go to Youtube, click Share -> Embed, and copy and paste the code to replace what's below.**
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/y3VAmNlER5Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/kgX9mb2ExEQ?si=B0Hw3EbwrpzRuEkY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-For your second milestone, explain what you've worked on since your previous milestone. You can highlight:
-- Technical details of what you've accomplished and how they contribute to the final goal
-- What has been surprising about the project so far
-- Previous challenges you faced that you overcame
-- What needs to be completed before your final milestone 
+**Technical details**
+- Exported the algorithm onto the Arduino board for live gesture recognition
+- Tested the algorithm and made sure it was accurately detecting all the gestures
+- Base project completed
+- Prints the algorithm's confidence level on which movement it detects, 1 being 100% confident
+
+**What has been surprising about the project so far**
+- I was suprised by how easily transferable the machine learning code and model structures are across different platforms
+- I was also shocked that the algorithm was able to so highly accurately detect the gestures I was doing, with the confidence level being 100% most of the time
+
+**Previous challenges I faced**
+- Arduino TensorFlow Lite library was archived and no longer supported by the Arduino IDE
+   - To overcome this, I had to manually find the files, and received help from supervisors who were able to provide me with the neccessary code
+- Algorithm stopped working and started completely guessing the gestures, predicting 50/50 confidence levels for both gestures despite what movement was actually being done
+   - To overcome this, I found that there was a mismatch between the alogrithm training enviorment and the hardware. I resolved this by fixing the calibration mapping and normalising the live input data in the Arduino code
+
+**What needs to be completed before your final milestone**
+- Changing to using flex sensors attatched to the fingers in order to detect micro movements
+- Updating the data to include gestures based on the movement of ALS patients
+- Updating the algorithm to fit the flex sensors
+- Making different gestures correspond to specific phrases
+- Adding a screen displaying these phrases, as well as a speaker which reads the phrases out loud
+
 
 # First Milestone
 <iframe width="560" height="315" src="https://www.youtube.com/embed/fzMGlm0GncQ?si=rIums7j7ZTaQL_my" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
