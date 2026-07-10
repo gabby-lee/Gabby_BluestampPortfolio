@@ -1,5 +1,5 @@
 # Gesture Detection with Arduino
-This device detects simple hand gestures which correspond to specific phrases that will be displayed on a screen. 
+This project features a gesture detection device targeted towards ALS patients who have limited mobility and are unable to verbally communicate. The device can detect micro finger movements, with different movements corresponding to specific phrases which are displayed on a screen and read aloud through a speaker. This project stemmed from the following base project: [Link](https://docs.arduino.cc/tutorials/nano-33-ble-sense-rev2/get-started-with-machine-learning/), which required gripping the entire Arduino board while doing big hand movements. I modified this base project to utilise flex sensors attatched to the fingers in order for the algorithm to detect micro movements, linked gestures to the corresponding phrases, and added the display screen and speaker for patients to effectively communicate. 
 
 You should comment out all portions of your portfolio that you have not completed yet, as well as any instructions:
 ```HTML 
@@ -61,6 +61,24 @@ For your final milestone, explain the outcome of your project. Key details to in
 
 # First Milestone
 <iframe width="560" height="315" src="https://www.youtube.com/embed/fzMGlm0GncQ?si=rIums7j7ZTaQL_my" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+**Technical progress you’ve made so far**
+- Setting up the base hardware and code
+- Data collection: The same gestures were repeated 10+ times to provide the algorithm with more examples of the gesture, ensuring higher accuracy
+- Built and trained the algorithm: Tensorflow was used to parse the data, and the algorithm was able to learn the patterns of each gesture
+- Tested the algorithm to ensure accuracy
+
+**Challenges you’re facing and solving in your future milestones**
+- I had issues downloading Tensorflow onto my computer
+   - In the end I was able to figure out the problem, which included differences in my Python version, as well as a lack of storage space on my computer
+- Difficulties uploading the data, the files not being the right format
+   - To overcome this, I used another platform, Visual Studio Code, to store and download my data
+
+**What your plan is to complete your project**
+- Export the trained algorithm and deploy it to Arduino
+- Add more gestures and link them to the specific phrases
+- Work on modifications: Flex sensors, screen display, speaker
+
 
 # Schematics 
 Here's where you'll put images of your schematics. [Tinkercad](https://www.tinkercad.com/blog/official-guide-to-tinkercad-circuits) and [Fritzing](https://fritzing.org/learning/) are both great resoruces to create professional schematic diagrams, though BSE recommends Tinkercad becuase it can be done easily and for free in the browser. 
