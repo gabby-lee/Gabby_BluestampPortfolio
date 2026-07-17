@@ -3,7 +3,7 @@ This project features a gesture detection device targeted towards ALS patients w
 
 | **Engineer** | **School** | **Area of Interest** | **Grade** |
 |:--:|:--:|:--:|:--:|
-| Gabrielle L | ISF | Biomedical Engineering | Incoming Senior
+| Gabrielle L | ISF | Biomedical Engineering | Grade 12
 
 **Replace the BlueStamp logo below with an image of yourself and your completed project. Follow the guide [here](https://tomcam.github.io/least-github-pages/adding-images-github-pages-site.html) if you need help.**
 
