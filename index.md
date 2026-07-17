@@ -5,22 +5,7 @@ This project features a gesture detection device targeted towards ALS patients w
 |:--:|:--:|:--:|:--:|
 | Gabrielle L | ISF | Biomedical Engineering | Grade 12
 
-**Replace the BlueStamp logo below with an image of yourself and your completed project. Follow the guide [here](https://tomcam.github.io/least-github-pages/adding-images-github-pages-site.html) if you need help.**
-
 ![Headstone Image](logo.svg)
-
-  
-# Final Milestone
-<iframe width="560" height="315" src="https://www.youtube.com/embed/F7M7imOVGug" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
-For your final milestone, explain the outcome of your project. Key details to include are:
-- What you've accomplished since your previous milestone
-- What your biggest challenges and triumphs were at BSE
-- A summary of key topics you learned about
-- What you hope to learn in the future after everything you've learned at BSE
-
-(I'm gonna make another video when I finish all the modifications I wanted to add after the program)
-
 
 # Third Milestone
 <iframe width="560" height="315" src="https://www.youtube.com/embed/V_1O0kNGWys?si=VWeheK56ym9BH6a2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -93,7 +78,7 @@ For your final milestone, explain the outcome of your project. Key details to in
 
 
 # Schematics 
-![Schematics](/Gabby_BluestampPortfolio/assets/schematic.jpg)
+![Schematics](Gabby_BluestampPortfolio/assets/schematic.jpg)
 
 
 # Code
@@ -245,6 +230,7 @@ inline String getPhraseForGesture(int gestureIndex) {
 ```
 
 # Bill of Materials
+
 | **Part** | **Note** | **Price** | **Link** |
 |:--:|:--:|:--:|:--:|
 | Arduino Nano 33 BLE Sense | Tracks the gestures and runs the algorithm to process data | $39.7 USD | [Link](https://a.co/d/0b4ZIPly) |
