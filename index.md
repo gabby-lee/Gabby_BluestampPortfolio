@@ -97,8 +97,7 @@ For your final milestone, explain the outcome of your project. Key details to in
 
 
 # Code
-Here's where you'll put your code. The syntax below places it into a block of code. Follow the guide [here]([url](https://www.markdownguide.org/extended-syntax/)) to learn how to customize it to your project needs. 
-
+**Main Code**
 ```c++
 #include "Arduino_BMI270_BMM150.h"
 #include <TensorFlowLite.h>
@@ -220,7 +219,7 @@ void loop() {
 }
 ```
 
-For Phrases:
+**Phrases**
 ```c++
 #ifndef PHRASES_H
 #define PHRASES_H
@@ -257,8 +256,7 @@ inline String getPhraseForGesture(int gestureIndex) {
 
 
 # Other Resources/Examples
-One of the best parts about Github is that you can view how other people set up their own work. Here are some past BSE portfolios that are awesome examples. You can view how they set up their portfolio, and you can view their index.md files to understand how they implemented different portfolio components.
-- [Base Project Tutorial:](https://docs.arduino.cc/tutorials/nano-33-ble-sense-rev2/get-started-with-machine-learning/)
+- [Base Project Tutorial](https://docs.arduino.cc/tutorials/nano-33-ble-sense-rev2/get-started-with-machine-learning/)
 - [Google Colab For Base Project](https://colab.research.google.com/)
 - [Google Colab With Modifications](https://colab.research.google.com/drive/1V5pKz0cHDzcEqBW0U2JlFXTMre7V5yi3?usp=sharing)
 
