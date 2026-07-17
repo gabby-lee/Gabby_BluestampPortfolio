@@ -78,7 +78,7 @@ This project features a gesture detection device targeted towards ALS patients w
 
 
 # Schematics 
-![Schematics](Gabby_BluestampPortfolio/assets/schematic.jpg)
+![Schematics](assets/schematic.jpg)
 
 
 # Code
