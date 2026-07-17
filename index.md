@@ -1,12 +1,6 @@
 # Gesture Detection with Arduino
 This project features a gesture detection device targeted towards ALS patients who have limited mobility and are unable to verbally communicate. The device can detect micro finger movements, with different movements corresponding to specific phrases which are displayed on a screen and read aloud through a speaker. This project stemmed from the following base project: [Link](https://docs.arduino.cc/tutorials/nano-33-ble-sense-rev2/get-started-with-machine-learning/), which required gripping the entire Arduino board while doing big hand movements. I modified this base project to utilise flex sensors attatched to the fingers in order for the algorithm to detect micro movements, linked gestures to the corresponding phrases, and added the display screen and speaker for patients to effectively communicate. 
 
-You should comment out all portions of your portfolio that you have not completed yet, as well as any instructions:
-```HTML 
-<!--- This is an HTML comment in Markdown -->
-<!--- Anything between these symbols will not render on the published site -->
-```
-
 | **Engineer** | **School** | **Area of Interest** | **Grade** |
 |:--:|:--:|:--:|:--:|
 | Gabrielle L | ISF | Biomedical Engineering | Incoming Senior
@@ -14,12 +8,12 @@ You should comment out all portions of your portfolio that you have not complete
 **Replace the BlueStamp logo below with an image of yourself and your completed project. Follow the guide [here](https://tomcam.github.io/least-github-pages/adding-images-github-pages-site.html) if you need help.**
 
 ![Headstone Image](logo.svg)
+
   
 # Final Milestone
-
-**Don't forget to replace the text below with the embedding for your milestone video. Go to Youtube, click Share -> Embed, and copy and paste the code to replace what's below.**
-
 <iframe width="560" height="315" src="https://www.youtube.com/embed/F7M7imOVGug" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+(I'm gonna make another video when I finish all the modifications I wanted to add after the program)
 
 For your final milestone, explain the outcome of your project. Key details to include are:
 - What you've accomplished since your previous milestone
@@ -28,11 +22,29 @@ For your final milestone, explain the outcome of your project. Key details to in
 - What you hope to learn in the future after everything you've learned at BSE
 
 
+# Third Milestone
+<iframe width="560" height="315" src="https://www.youtube.com/embed/V_1O0kNGWys?si=VWeheK56ym9BH6a2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+**Modifications**
+- Flex sensors: Completed the wiring of the flex sensors, recollected data of the new gestures, updatated the algorithm code to support 8 columns of data (the two new columns being the two flex sensors)
+   - ALS patients have limited mobility but often still have slight movement in their fingers and wrists, the flex sensors can detect extremely subtle small movements and finger twitches
+- Made the gestures correspond to specific phrases
+   - Allows for the ALS patients to be able to communicate with their families and doctors
+ 
+**Challenges I faced**  
+- Wiring the flex sensors: The pins were short and weirdly shaped, leading to loose connections
+   - To overcome this, I tried many different solutions, including:
+   - Taping the pins and wires together using electrical tape, but because the pins were so small, it was hard to securely connect it with the tape, and the sensors were therefore unable to be detected
+   - Using bobby pins to make the connections more secure, but the bobby pins themselves kept moving around
+   - Purchasing adapters so the flex sensors can securely attatch to the breadboard, but I was unable to find the official adapter and the alternatives I purchased failed
+   - Finally, I decided to make a permanent and secure connection by soldering the pins and wires together
+ 
+**Next Steps**
+- Connecting the OLED display screen and speaker
+- Writing up the code for the two add ons
+
 
 # Second Milestone
-
-**Don't forget to replace the text below with the embedding for your milestone video. Go to Youtube, click Share -> Embed, and copy and paste the code to replace what's below.**
-
 <iframe width="560" height="315" src="https://www.youtube.com/embed/kgX9mb2ExEQ?si=B0Hw3EbwrpzRuEkY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 **Technical details**
@@ -81,38 +93,172 @@ For your final milestone, explain the outcome of your project. Key details to in
 
 
 # Schematics 
-Here's where you'll put images of your schematics. [Tinkercad](https://www.tinkercad.com/blog/official-guide-to-tinkercad-circuits) and [Fritzing](https://fritzing.org/learning/) are both great resoruces to create professional schematic diagrams, though BSE recommends Tinkercad becuase it can be done easily and for free in the browser. 
+![Schematics](/Gabby_BluestampPortfolio/assets/schematic.jpg)
+
 
 # Code
 Here's where you'll put your code. The syntax below places it into a block of code. Follow the guide [here]([url](https://www.markdownguide.org/extended-syntax/)) to learn how to customize it to your project needs. 
 
 ```c++
+#include "Arduino_BMI270_BMM150.h"
+#include <TensorFlowLite.h>
+#include <tensorflow/lite/micro/all_ops_resolver.h>
+#include <tensorflow/lite/micro/micro_interpreter.h>
+#include <tensorflow/lite/schema/schema_generated.h>
+
+#include "model.h"
+#include "Phrases.h"
+
+const int FLEX_1_PIN = A0; 
+const int FLEX_2_PIN = A1; 
+
+const int numSamples = 15;
+const int NUM_FEATURES = 8;             
+int samplesRead = 0; 
+
+tflite::AllOpsResolver tflOpsResolver;
+const tflite::Model* tflModel = nullptr;
+tflite::MicroInterpreter* tflInterpreter = nullptr;
+TfLiteTensor* tflInputTensor = nullptr;
+TfLiteTensor* tflOutputTensor = nullptr;
+
+constexpr int tensorArenaSize = 12 * 1024; 
+byte tensorArena[tensorArenaSize] __attribute__((aligned(16)));
+
+const char* GESTURES[] = {
+  "Idle",
+  "2nd_finger_down",
+  "3rd_finger_down",
+  "both_fingers_down"
+};
+#define NUM_GESTURES (sizeof(GESTURES) / sizeof(GESTURES[0]))
+
 void setup() {
-  // put your setup code here, to run once:
   Serial.begin(9600);
-  Serial.println("Hello World!");
+  while (!Serial); 
+
+  Serial.println("--- Bare Minimum + Phrases Test ---");
+
+  if (!IMU.begin()) {
+    Serial.println("Failed to initialize IMU!");
+    while (1);
+  }
+  
+  pinMode(FLEX_1_PIN, INPUT);
+  pinMode(FLEX_2_PIN, INPUT);
+
+  tflModel = tflite::GetModel(model);
+  tflInterpreter = new tflite::MicroInterpreter(
+    tflModel, tflOpsResolver, tensorArena, tensorArenaSize
+  );
+
+  tflInterpreter->AllocateTensors();
+  tflInputTensor = tflInterpreter->input(0);
+  tflOutputTensor = tflInterpreter->output(0);
+
+  Serial.println("Setup Complete. Streaming live predictions and phrases...");
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  float aX = 0, aY = 0, aZ = 0;
+  float gX = 0, gY = 0, gZ = 0;
 
-}https://www.amazon.com/Arduino-Nano-Sense-headers-ABX00070/dp/B0BQHZ88WD/
+  if (IMU.accelerationAvailable()) {
+    IMU.readAcceleration(aX, aY, aZ);
+  }
+  if (IMU.gyroscopeAvailable()) {
+    IMU.readGyroscope(gX, gY, gZ);
+  }
+  
+  float flex1 = analogRead(FLEX_1_PIN);
+  float flex2 = analogRead(FLEX_2_PIN);
+
+  tflInputTensor->data.f[samplesRead * NUM_FEATURES + 0] = (aX + 4.0) / 8.0;
+  tflInputTensor->data.f[samplesRead * NUM_FEATURES + 1] = (aY + 4.0) / 8.0;
+  tflInputTensor->data.f[samplesRead * NUM_FEATURES + 2] = (aZ + 4.0) / 8.0;
+  tflInputTensor->data.f[samplesRead * NUM_FEATURES + 3] = (gX + 2000.0) / 4000.0;
+  tflInputTensor->data.f[samplesRead * NUM_FEATURES + 4] = (gY + 2000.0) / 4000.0;
+  tflInputTensor->data.f[samplesRead * NUM_FEATURES + 5] = (gZ + 2000.0) / 4000.0;
+  tflInputTensor->data.f[samplesRead * NUM_FEATURES + 6] = flex1 / 1023.0; 
+  tflInputTensor->data.f[samplesRead * NUM_FEATURES + 7] = flex2 / 1023.0; 
+
+  samplesRead++;
+
+  if (samplesRead == numSamples) {
+    tflInterpreter->Invoke();
+
+    Serial.println("\n=====================================");
+    
+    int bestGestureIndex = 0;
+    float maxConfidence = 0.0;
+
+    for (int i = 0; i < NUM_GESTURES; i++) {
+      float confidence = tflOutputTensor->data.f[i] * 100.0;
+      Serial.print(GESTURES[i]);
+      Serial.print(": ");
+      Serial.print(confidence, 1);
+      Serial.println("%");
+
+      if (confidence > maxConfidence) {
+        maxConfidence = confidence;
+        bestGestureIndex = i;
+      }
+    }
+    
+    String assignedPhrase = getPhraseForGesture(bestGestureIndex);
+
+    Serial.print("\n>>> DETECTED: ");
+    Serial.println(GESTURES[bestGestureIndex]);
+    Serial.print(">>> PHRASE:   ");
+    Serial.println(assignedPhrase);
+    Serial.println("=====================================");
+    
+    samplesRead = 0; // Reset sample pointer
+    delay(1000);     // 1-second delay so you can easily read the terminal updates
+  }
+  delay(20); // Tiny pause to space out the 15 window frames cleanly
+}
+```
+
+For Phrases:
+```c++
+#ifndef PHRASES_H
+#define PHRASES_H
+
+#include <Arduino.h>
+
+inline String getPhraseForGesture(int gestureIndex) {
+  switch(gestureIndex) {
+    case 0:
+      return "System is resting.";
+    case 1:
+      return "Hello!";
+    case 2:
+      return "Thank you";
+    case 3:
+      return "Goodbye";
+    default:
+      return "Unknown gesture.";
+  }
+}
+
+#endif
 ```
 
 # Bill of Materials
-Here's where you'll list the parts in your project. To add more rows, just copy and paste the example rows below.
-Don't forget to place the link of where to buy each component inside the quotation marks in the corresponding row after href =. Follow the guide [here]([url](https://www.markdownguide.org/extended-syntax/)) to learn how to customize this to your project needs. 
-
 | **Part** | **Note** | **Price** | **Link** |
 |:--:|:--:|:--:|:--:|
 | Arduino Nano 33 BLE Sense | Tracks the gestures and runs the algorithm to process data | $39.7 USD | [Link](https://a.co/d/0b4ZIPly) |
 | Micro USB | To connect the Arduino board to your device | $7.34 USD | [Link](https://www.amazon.com/Amazon-Basics-Charging-Transfer-Gold-Plated/dp/B07232M876/) |
 | Electronics Kit | Provides neccessary hardware | $14 USD | [Link](https://www.amazon.com/Smraza-Electronics-Potentiometer-tie-Points-Breadboard/dp/B0B62RL725/r) |
+| 2.2" Flexible Sensor | Measures finger bending angles and senses gestures | $15.95 USD | [Link](https://a.co/d/04WPG198) |
+| 2.42-inch 128x64 I2C OLED Display Module | Provides a visual display for live text outputs | $15.99 USD | [Link](https://a.co/d/01P6DQxX) |
+| DFRobot Gravity: Digital Speaker Module FIT0449 | Converts text output into live audio phrases and voice assistance | $26.90 USD | [Link](https://www.dfrobot.com/product-2234.html) |
+
 
 # Other Resources/Examples
 One of the best parts about Github is that you can view how other people set up their own work. Here are some past BSE portfolios that are awesome examples. You can view how they set up their portfolio, and you can view their index.md files to understand how they implemented different portfolio components.
-- [Example 1](https://trashytuber.github.io/YimingJiaBlueStamp/)
-- [Example 2](https://sviatil0.github.io/Sviatoslav_BSE/)
-- [Example 3](https://arneshkumar.github.io/arneshbluestamp/)
+- [Base Project Tutorial:](https://docs.arduino.cc/tutorials/nano-33-ble-sense-rev2/get-started-with-machine-learning/)
+- [Google Colab For Base Project](https://colab.research.google.com/)
+- [Google Colab With Modifications](https://colab.research.google.com/drive/1V5pKz0cHDzcEqBW0U2JlFXTMre7V5yi3?usp=sharing)
 
-To watch the BSE tutorial on how to create a portfolio, click here.
