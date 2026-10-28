@@ -76,7 +76,7 @@ This project features a gesture detection device targeted towards ALS patients w
 
 
 # Schematics 
-<img width="1309" height="707" alt="schematic" src="https://github.com/user-attachments/assets/4e081e6e-1fe9-4bc8-8fe2-e4a617aed5c6" />
+<img width="1309" height="507" alt="schematic" src="https://github.com/user-attachments/assets/4e081e6e-1fe9-4bc8-8fe2-e4a617aed5c6" />
 
 
 # Code
