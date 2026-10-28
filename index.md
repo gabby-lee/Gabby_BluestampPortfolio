@@ -1,3 +1,4 @@
+<img width="1309" height="907" alt="schematic" src="https://github.com/user-attachments/assets/cd0ba2c9-aa46-427c-a3f4-ee3ae3928967" />
 # Gesture Detection with Arduino
 This project features a gesture detection device targeted towards ALS patients who have limited mobility and are unable to verbally communicate. The device can detect micro finger movements, with different movements corresponding to specific phrases which are displayed on a screen and read aloud through a speaker. This project stemmed from the following [Base Project](https://docs.arduino.cc/tutorials/nano-33-ble-sense-rev2/get-started-with-machine-learning/), which required gripping the entire Arduino board while doing big hand movements. I modified this base project to utilise flex sensors attatched to the fingers in order for the algorithm to detect micro movements, linked gestures to the corresponding phrases, and added the display screen and speaker for patients to effectively communicate. 
 
@@ -77,6 +78,7 @@ This project features a gesture detection device targeted towards ALS patients w
 
 # Schematics 
 ![Schematics](assets/schematic.jpg)
+<img width="1309" height="907" alt="schematic" src="https://github.com/user-attachments/assets/4e081e6e-1fe9-4bc8-8fe2-e4a617aed5c6" />
 
 
 # Code
