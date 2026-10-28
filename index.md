@@ -3,9 +3,7 @@ This project features a gesture detection device targeted towards ALS patients w
 
 | **Engineer** | **School** | **Area of Interest** | **Grade** |
 |:--:|:--:|:--:|:--:|
-| Gabrielle L | ISF | Biomedical Engineering | Grade 12
-
-![Headstone Image](logo.svg)
+| Gabrielle L | ISF | Cognitive Sciences | Grade 12
 
 # Third Milestone
 <iframe width="560" height="315" src="https://www.youtube.com/embed/V_1O0kNGWys?si=VWeheK56ym9BH6a2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
